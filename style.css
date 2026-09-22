@@ -1,105 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap');
+
 /* ===================================================================
    재밌는 사이트 모음 — 공통 스타일
    이 파일은 팀장이 처음 한 번만 올립니다.
    각자 작업할 때는 건드리지 않습니다.
+
+   디자인 컨셉 — "링크"
+   이 페이지는 링크 모음입니다. 그래서 웹에서 가장 오래된 약속을 그대로 씁니다.
+   링크는 파랗고, 한 번 눌러본 링크는 보라색이 된다는 규칙이요.
+   이미 다녀온 카드는 제목과 아이콘 테두리가 보라로 바뀝니다.
    =================================================================== */
 
 :root {
-  --green: #1f7a5c;
-  --green-dark: #17604a;
-  --ink: #23302c;
-  --ink-soft: #5d6b66;
-  --line: #e4e6e2;
-  --bg: #f8f7f3;
-  --card: #ffffff;
+  --ink: #141826;
+  --ink-soft: #5b6076;
+  --link: #2430d8;
+  --link-dark: #1a23a8;
+  --link-wash: #eef0ff;
+  --visited: #7a2bb8;
+  --paper: #ffffff;
+  --field: #eceef5;
+  --line: #d5d8e4;
+
+  /* 일부 상세 페이지가 직접 참조하는 변수 — 이름을 유지합니다 */
+  --green: #0f7a66;
+  --green-dark: #0b5e4f;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--field);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
-               "Pretendard", "Malgun Gothic", "맑은 고딕", sans-serif;
+  font-family: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont,
+               "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+  font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
 a { color: inherit; text-decoration: none; }
 
+:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
 .container {
   width: 100%;
-  max-width: 980px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-/* 상세 페이지는 글이 많으므로 폭을 좁게 잡습니다 */
 .container-narrow {
-  max-width: 700px;
+  max-width: 680px;
+  padding-bottom: 56px;
 }
 
-/* ── 홈 상단 ───────────────────────────────────────────────── */
+/* ── 홈 첫 화면 ─────────────────────────────────────────────── */
 
 .hero {
-  padding: 72px 24px 44px;
-  text-align: center;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 84px 24px 44px;
 }
 
 .hero-eyebrow {
   margin: 0 0 10px;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  color: var(--green);
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--link);
 }
 
 .hero h1 {
+  display: inline-block;
   margin: 0;
-  font-size: 44px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: clamp(38px, 7vw, 62px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
 }
 
+/* 제목 아래 굵은 밑줄 — 링크 밑줄을 키운 것입니다 */
 .hero h1::after {
   content: "";
   display: block;
-  width: 64px;
-  height: 4px;
-  margin: 18px auto 0;
-  border-radius: 4px;
-  background: var(--green);
+  height: 9px;
+  margin-top: 16px;
+  border-radius: 2px;
+  background: var(--link);
 }
 
 .hero-desc {
-  margin: 18px 0 0;
+  margin: 20px 0 0;
+  max-width: 46ch;
   font-size: 17px;
   color: var(--ink-soft);
 }
 
-/* ── 카드 그리드 ───────────────────────────────────────────── */
+/* ── 카드 목록 ──────────────────────────────────────────────── */
 
 .card-grid {
   list-style: none;
   margin: 0;
-  padding: 0 0 56px;
+  padding: 0 0 64px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+  gap: 18px;
 }
 
 .card {
-  background: var(--card);
+  background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(35, 48, 44, 0.09);
+  border-color: var(--link);
+  background: var(--link-wash);
 }
 
 .card-link {
@@ -108,185 +131,244 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
 }
 
+/* 파스텔 색은 카드마다 다릅니다. 큰 면적 대신 작은 타일로 씁니다 */
 .card-thumb {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 132px;
   flex: none;
-  font-size: 52px;
-  background: var(--thumb, #eef2ef);
+  width: 52px;
+  height: 52px;
+  margin: 18px 18px 0;
+  border: 1px solid rgba(20, 24, 38, 0.08);
+  border-radius: 9px;
+  /* 이모지 대신 긴 글자가 들어와도 타일 밖으로 새지 않게 막습니다 */
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 27px;
+  line-height: 1;
+  background: var(--thumb, var(--link-wash));
+  transition: border-color 0.15s ease;
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 20px 22px 24px;
+  padding: 14px 18px 18px;
 }
 
 .card-title {
   display: block;
-  font-size: 19px;
-  font-weight: 700;
-  margin-bottom: 7px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  text-underline-offset: 3px;
+}
+
+.card:hover .card-title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .card-summary {
   display: block;
   flex: 1;
-  font-size: 15px;
+  font-size: 14.5px;
+  line-height: 1.6;
   color: var(--ink-soft);
-  min-height: 48px;
+  min-height: 46px;
 }
 
+/* 누가 추천했는지 — 카드 바닥에 서명처럼 */
 .card-meta {
-  display: inline-block;
-  align-self: flex-start;
-  margin-top: 14px;
-  padding: 4px 11px;
-  border-radius: 999px;
-  background: #eef4f1;
-  color: var(--green-dark);
+  display: block;
+  align-self: stretch;
+  margin-top: 16px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
   font-size: 13px;
-  font-weight: 600;
+  color: var(--ink-soft);
 }
 
-/* 비어 있는 자리 — 내 카드를 넣을 곳 */
+/* 한 번 눌러본 카드는 색이 바뀝니다 */
+.card-link:visited .card-title { color: var(--visited); }
+.card-link:visited .card-thumb { border-color: var(--visited); }
+
+/* ── 비어 있는 자리 — 내 카드를 넣을 곳 ─────────────────────── */
+
 .card-empty {
-  border: 2px dashed #d3dad6;
-  background: transparent;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 268px;
-  color: #9aa5a0;
-  text-align: center;
+  min-height: 210px;
   padding: 24px;
+  text-align: center;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px dashed var(--line);
 }
 
-.card-empty:hover { transform: none; box-shadow: none; }
+.card-empty:hover {
+  border-color: var(--link);
+  background: transparent;
+}
+
 .card-empty .plus {
-  display: block;
-  font-size: 30px;
-  font-weight: 300;
-  color: #c2cbc6;
-  margin-bottom: 10px;
+  font-size: 26px;
+  color: var(--link);
+  margin-bottom: 8px;
 }
-.card-empty strong { display: block; font-size: 16px; color: #7f8b86; margin-bottom: 5px; }
-.card-empty em { display: block; font-size: 14px; font-style: normal; }
 
-/* ── 상세 페이지 ───────────────────────────────────────────── */
+.card-empty strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.card-empty em {
+  display: block;
+  font-size: 13.5px;
+  font-style: normal;
+}
+
+/* ── 상세 페이지 ────────────────────────────────────────────── */
 
 .detail-nav {
-  padding: 28px 0 0;
+  padding: 32px 0 28px;
   font-size: 15px;
-  color: var(--ink-soft);
-  font-weight: 600;
 }
 
-.detail-nav a:hover { color: var(--green); }
+.detail-nav a {
+  color: var(--link);
+  font-weight: 500;
+}
+
+.detail-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 .detail-head {
   display: flex;
   align-items: center;
-  gap: 22px;
-  padding: 40px 0 30px;
+  gap: 18px;
+  padding-bottom: 28px;
   border-bottom: 1px solid var(--line);
 }
 
 .detail-thumb {
-  flex: 0 0 96px;
-  height: 96px;
-  border-radius: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 46px;
-  background: var(--thumb, #eef2ef);
+  flex: none;
+  width: 66px;
+  height: 66px;
+  border: 1px solid rgba(20, 24, 38, 0.08);
+  border-radius: 11px;
+  font-size: 34px;
+  line-height: 1;
+  background: var(--thumb, var(--link-wash));
 }
 
 .detail-head h1 {
-  margin: 0 0 6px;
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+  font-size: clamp(27px, 4.5vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
 .detail-head p {
   margin: 0;
-  color: var(--ink-soft);
   font-size: 16px;
+  color: var(--ink-soft);
 }
 
 .detail-section {
-  padding: 34px 0 0;
+  padding: 30px 0 0;
 }
 
 .detail-section h2 {
-  margin: 0 0 12px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--green);
-  letter-spacing: 0.04em;
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--link);
 }
 
 .detail-section p {
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
+  color: var(--ink);
 }
 
 .detail-section ul {
-  margin: 0;
-  padding-left: 22px;
-  font-size: 17px;
+  margin: 10px 0 0;
+  padding-left: 20px;
 }
 
-.detail-section li { margin-bottom: 6px; }
+.detail-section li {
+  margin-bottom: 7px;
+  color: var(--ink);
+}
 
+/* 원래 사이트로 가는 버튼 — 이 페이지의 목적지입니다 */
 .visit {
   display: inline-block;
-  margin: 40px 0 0;
-  padding: 15px 30px;
-  border-radius: 999px;
-  background: var(--green);
-  color: #fff;
-  font-size: 17px;
-  font-weight: 700;
+  margin-top: 36px;
+  padding: 14px 24px;
+  border-radius: 9px;
+  background: var(--link);
+  color: var(--paper);
+  font-size: 16px;
+  font-weight: 600;
   transition: background 0.15s ease;
 }
 
-.visit:hover { background: var(--green-dark); }
+.visit:hover { background: var(--link-dark); }
 
 .visit-note {
-  margin: 12px 0 0;
-  font-size: 14px;
+  margin: 10px 0 0;
+  font-size: 13px;
   color: var(--ink-soft);
 }
 
 .detail-foot {
-  margin: 44px 0 0;
-  padding: 22px 0 64px;
+  margin-top: 40px;
+  padding-top: 18px;
   border-top: 1px solid var(--line);
-  font-size: 15px;
+  font-size: 13px;
   color: var(--ink-soft);
 }
 
-/* ── 바닥글 ────────────────────────────────────────────────── */
+/* ── 홈 바닥 ────────────────────────────────────────────────── */
 
 .site-foot {
-  padding: 30px 24px 48px;
-  text-align: center;
-  font-size: 14px;
-  color: #98a29e;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 22px 24px 40px;
   border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--ink-soft);
 }
 
-/* ── 화면이 좁을 때 ────────────────────────────────────────── */
+/* ── 화면이 좁을 때 ─────────────────────────────────────────── */
 
-@media (max-width: 600px) {
-  .hero { padding: 52px 20px 32px; }
-  .hero h1 { font-size: 32px; }
-  .detail-head { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .detail-head h1 { font-size: 26px; }
+@media (max-width: 640px) {
+  .hero { padding: 56px 20px 32px; }
+  .hero h1::after { height: 7px; margin-top: 12px; }
+  .container { padding: 0 20px; }
+  .card-grid { gap: 14px; padding-bottom: 48px; }
+  .detail-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .site-foot { padding: 20px 20px 32px; }
+}
+
+/* ── 움직임을 줄이도록 설정한 사람에게는 ────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
 }
