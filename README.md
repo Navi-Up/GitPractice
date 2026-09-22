@@ -13,8 +13,8 @@
 
 ```
 .
-├── index.html            홈 — 카드 목록 (팀원 모두가 고칩니다)
-├── style.css             공통 스타일 (아무도 고치지 않습니다)
+├── index.html            홈 — 카드 목록 
+├── style.css             공통 스타일 (팀장 외에 수정 X)
 └── sites/
     └── neal-fun.html     상세 페이지 예시 — 이 파일을 복사해서 쓰세요
 ```
@@ -25,7 +25,7 @@
 | --- | --- | --- |
 | `main` | 완성본 · 배포용 | **직접 push 금지.** PR로만 반영, force push · 삭제 불가 |
 | `develop` | 기본 작업 브랜치 | 모든 `feature` PR 의 base |
-| `feature/<이슈번호>` | 작업 하나 | 이슈 1개 = 브랜치 1개, 머지 후 삭제 |
+| `feature/기능명/<이슈번호>` | 작업 하나 | 이슈 1개 = 브랜치 1개, 머지 후 삭제 |
 
 ```
 feature/12 ──► develop ──► main
@@ -36,7 +36,7 @@ feature/12 ──► develop ──► main
 | 대상 | 형식 | 예시 |
 | --- | --- | --- |
 | 이슈 제목 | `[태그] 요약` | `[Feature] neal.fun 상세 페이지 추가` |
-| 브랜치 | `feature/<이슈번호>` | `feature/12` |
+| 브랜치 | `feature/기능명/<이슈번호>` | `feature/readme/#12` |
 | PR 제목 | `[태그] 요약 #이슈번호` | `[Feature] neal.fun 상세 페이지 추가 #12` |
 | 커밋 메시지 | `type: 요약` | `feat: neal.fun 상세 페이지 추가` |
 
@@ -60,7 +60,7 @@ feature/12 ──► develop ──► main
 ```bash
 git switch develop
 git pull origin develop
-git switch -c feature/12
+git switch -c feature/기능명/#12
 ```
 
 ### 3. 작업하고 커밋 · 푸시
@@ -68,7 +68,7 @@ git switch -c feature/12
 ```bash
 git add .
 git commit -m "feat: neal.fun 상세 페이지 추가"
-git push -u origin feature/12
+git push -u origin feature/기능명/#12
 ```
 
 ### 4. PR 보내기
@@ -77,26 +77,15 @@ git push -u origin feature/12
 - 제목: `[Feature] neal.fun 상세 페이지 추가 #12`
 - 본문의 `Closes #` 뒤에 이슈 번호를 적습니다 → `Closes #12`
 
-### 5. 머지하고 정리
 
-머지한 뒤 GitHub 의 `Delete branch` 버튼으로 원격 브랜치를 지우고, 로컬도 정리합니다.
-
-```bash
-git switch develop
-git pull origin develop
-git branch -d feature/12
-```
 
 > `Closes #12` 는 **기본 브랜치(`main`)로 머지될 때** 이슈를 자동으로 닫습니다.
 > `develop` 머지 단계에서는 안 닫히니, 작업이 끝났으면 이슈를 직접 닫아주세요.
 
 ## 내 사이트를 추가하는 방법
 
-1. 위 **작업 흐름** 대로 이슈를 만들고 `feature/<이슈번호>` 브랜치를 팝니다
-2. `sites/neal-fun.html` 을 복사해 `sites/<사이트이름>.html` 로 저장하고 내용을 채웁니다
-3. `index.html` 의 카드 블록(`▼▼▼ 카드 하나 시작` ~ `▲▲▲ 카드 하나 끝`)을 복사해
-   목록 아래에 붙이고, 링크·제목·소개·이모지·색을 내 것으로 바꿉니다
-4. 커밋하고 푸시한 뒤 `develop` 으로 풀 리퀘스트를 보냅니다
+1. 위 **작업 흐름** 대로 이슈를 만들고 `feature/기능명/<이슈번호>` 브랜치를 팝니다
+2. 커밋하고 푸시한 뒤 `develop` 으로 풀 리퀘스트를 보냅니다
 
 ## 주의
 
