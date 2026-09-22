@@ -1,0 +1,22 @@
+name: 작업 / 정리
+description: 문서, 설정, 리팩터링처럼 기능도 버그도 아닌 작업입니다.
+title: "[Task] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        제목은 `[Task] ` 뒤에 한 줄 요약을 이어서 적어주세요.
+        예) `[Task] README 브랜치 전략 문단 정리`
+  - type: textarea
+    id: what
+    attributes:
+      label: 작업 내용
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: 왜 필요한가요
+    validations:
+      required: false

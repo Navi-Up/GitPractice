@@ -1,0 +1,38 @@
+name: 기능 추가 / 변경
+description: 새로 만들거나 바꾸고 싶은 것을 제안합니다.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        제목은 `[Feature] ` 뒤에 한 줄 요약을 이어서 적어주세요.
+        예) `[Feature] neal.fun 상세 페이지 추가`
+
+        이슈를 만든 뒤 발급된 번호로 `feature/<이슈번호>` 브랜치를 만들어 작업합니다.
+  - type: textarea
+    id: summary
+    attributes:
+      label: 무엇을 하려고 하나요
+      description: 한두 문장으로 요약해주세요.
+      placeholder: sites/ 에 상세 페이지를 추가하고 index.html 카드 목록에 연결합니다.
+    validations:
+      required: true
+  - type: textarea
+    id: todo
+    attributes:
+      label: 할 일
+      description: 체크박스로 쪼개면 진행 상황을 추적하기 좋습니다.
+      value: |
+        - [ ] 
+        - [ ] 
+    validations:
+      required: false
+  - type: textarea
+    id: done
+    attributes:
+      label: 완료 조건
+      description: 무엇이 되면 이 이슈를 닫을 수 있나요?
+      placeholder: 홈에서 카드를 누르면 상세 페이지로 이동한다.
+    validations:
+      required: true
