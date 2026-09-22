@@ -1,0 +1,40 @@
+name: 버그 리포트
+description: 동작하지 않거나 깨진 부분을 신고합니다.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        제목은 `[Bug] ` 뒤에 한 줄 요약을 이어서 적어주세요.
+        예) `[Bug] 모바일에서 카드가 겹쳐 보임`
+  - type: textarea
+    id: what
+    attributes:
+      label: 어떤 문제가 있나요
+      placeholder: 화면 폭이 좁아지면 카드 두 개가 겹쳐서 글씨가 안 보입니다.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 방법
+      value: |
+        1. 
+        2. 
+        3. 
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대한 동작
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: 환경
+      placeholder: macOS 15 / Chrome 130 / 모바일 화면 폭 390px
+    validations:
+      required: false
